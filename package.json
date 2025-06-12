@@ -2,13 +2,16 @@
   "name": "@rareants/menorepo",
   "version": "0.0.1",
   "private": true,
+  "packageManager": "pnpm@9.7.0",
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "description": "",
   "main": "index.js",
-  "packageManager": "pnpm@9.7.0",
+  "files": [
+    "README.md"
+  ],
   "scripts": {
     "ci:publish": "pnpm publish -r",
     "test": "echo \"Error: no test specified\" && exit 1",
