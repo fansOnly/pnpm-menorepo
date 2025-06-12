@@ -8,6 +8,7 @@
   ],
   "description": "",
   "main": "index.js",
+  "packageManager": "pnpm@9.7.0",
   "scripts": {
     "ci:publish": "pnpm publish -r",
     "test": "echo \"Error: no test specified\" && exit 1",

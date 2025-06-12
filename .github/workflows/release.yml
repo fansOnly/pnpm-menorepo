@@ -20,6 +20,11 @@ jobs:
         with:
           node-version: 20.x
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.7.0 # 指定所需版本
+
       - name: Install Dependencies
         run: pnpm
 
