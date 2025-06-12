@@ -30,11 +30,15 @@ jobs:
 
       - name: Install Dependencies
         run: pnpm install
+      
+      - name: Debug Token
+        run: echo "GITHUB_TOKEN is set? ${#CHANGESET_CI_TOKEN}" 
+        run: echo "NPM_TOKEN is set? ${#NPM_TOKEN}" 
 
-      # - name: Set NPM_TOKEN
-      #   run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      #   env:
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Set NPM_TOKEN
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Verify NPM_TOKEN
         run: |
@@ -42,8 +46,6 @@ jobs:
             echo "NPM_TOKEN is not set. Ensure it is configured in the repository secrets."
             exit 1
           fi
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
