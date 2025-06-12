@@ -7,8 +7,6 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-permissions: write-all
-
 jobs:
   release:
     name: Release
@@ -32,9 +30,10 @@ jobs:
         run: pnpm install
 
       - name: Debug Token
-        run: echo "GITHUB_TOKEN is set? ${{secrets.CHANGESET_CI_TOKEN}},NPM_TOKEN is set? ${{secrets.NPM_TOKEN}}"
+        run: echo "GITHUB_TOKEN is set? ${GITHUB_TOKEN},GITHUB_TOKEN2 is set? ${GITHUB_TOKEN2},NPM_TOKEN is set? ${NPM_TOKEN}"
         env:
           GITHUB_TOKEN: ${{ secrets.CHANGESET_CI_TOKEN }}
+          GITHUB_TOKEN2: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Set NPM_TOKEN
