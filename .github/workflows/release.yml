@@ -7,12 +7,12 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions: write-all
+
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
