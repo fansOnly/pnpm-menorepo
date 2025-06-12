@@ -13,7 +13,7 @@
     "README.md"
   ],
   "scripts": {
-    "ci:publish": "pnpm publish -r",
+    "ci:publish": "pnpm publish -r --no-git-checks",
     "test": "echo \"Error: no test specified\" && exit 1",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky"
