@@ -29,13 +29,6 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      - name: Debug Token
-        run: echo "GITHUB_TOKEN is set? ${GITHUB_TOKEN},GITHUB_TOKEN2 is set? ${GITHUB_TOKEN2},NPM_TOKEN is set? ${NPM_TOKEN}"
-        env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESET_CI_TOKEN }}
-          GITHUB_TOKEN2: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Set NPM_TOKEN
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
         env:
@@ -58,7 +51,7 @@ jobs:
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
           publish: pnpm ci:publish
         env:
-          GITHUB_TOKEN: ${{ secrets.CHANGESET_CI_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Send a Slack notification if a publish happens
