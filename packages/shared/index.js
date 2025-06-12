@@ -8,3 +8,5 @@ export function add(a, b) {
 export function formatDate(date) {
 	return dayjs(date).format("YYYY-MM-DD");
 }
+
+console.log("update version.");
