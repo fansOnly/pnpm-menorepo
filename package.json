@@ -1,0 +1,36 @@
+{
+  "name": "@rareants/menorepo",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ci:publish": "pnpm publish -r",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky"
+  },
+  "keywords": [
+    "rareants",
+    "pnpm",
+    "menorepo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@changesets/cli": "^2.29.4",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.0",
+    "vite": "^6.3.5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "biome check --write"
+    ]
+  }
+}
