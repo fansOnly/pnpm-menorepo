@@ -7,6 +7,10 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   release:
     name: Release
@@ -29,12 +33,18 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
-      # 关键配置：认证 + 源设置
-      - name: 配置 npm 凭据
+      - name: Set NPM_TOKEN
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       - run: npm config set registry https://registry.npmjs.org/
+
+      - name: Verify NPM_TOKEN
+        run: |
+          if [ -z "${{ secrets.NPM_TOKEN }}" ]; then
+            echo "NPM_TOKEN is not set. Ensure it is configured in the repository secrets."
+            exit 1
+          fi
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -44,7 +54,7 @@ jobs:
           commit: 'chore: update versions'
           title: 'chore: update versions'
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm changeset publish
+          publish: pnpm ci:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
